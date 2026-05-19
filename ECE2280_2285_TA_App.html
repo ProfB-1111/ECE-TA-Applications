@@ -51,11 +51,17 @@
 
   .logo-bar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1.25rem;
   }
-  .logo-bar img {
+  .logo-bar .ece-logo {
     height: 48px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .logo-bar .asia-logo {
+    height: 52px;
     width: auto;
     filter: brightness(0) invert(1);
   }
@@ -312,6 +318,155 @@
     white-space: nowrap;
   }
   #toast.error { background: #2a1a1a; border-color: var(--accent); color: var(--accent); }
+
+  /* ── duties section ── */
+  .duties-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .duties-card h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .duties-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1.5rem;
+  }
+  @media (max-width: 520px) { .duties-grid { grid-template-columns: 1fr; } }
+  .duties-group h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: .5rem;
+    letter-spacing: .04em;
+  }
+  .duties-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .duties-group ul li {
+    font-size: .85rem;
+    color: var(--muted);
+    padding-left: .9rem;
+    position: relative;
+    margin-bottom: .3rem;
+    line-height: 1.5;
+  }
+  .duties-group ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .duties-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1rem 0;
+  }
+  .duties-time {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: .25rem;
+  }
+  .time-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem;
+    color: var(--accent2);
+    background: rgba(224,90,0,.08);
+    border: 1px solid rgba(224,90,0,.3);
+    border-radius: 3px;
+    padding: .2rem .6rem;
+  }
+
+  /* ── SI duties card accent ── */
+  .duties-card.si-card {
+    border-left-color: #2ea043;
+  }
+  .duties-card.si-card h3 {
+    color: #2ea043;
+  }
+  .duties-card.si-card .duties-group ul li::before {
+    color: #2ea043;
+  }
+  .duties-card.si-card .time-chip {
+    color: #2ea043;
+    background: rgba(46,160,67,.08);
+    border-color: rgba(46,160,67,.3);
+  }
+
+  /* ── position selection card ── */
+  .position-select-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .position-select-card label.question {
+    display: block;
+    font-weight: 500;
+    margin-bottom: .9rem;
+    color: var(--text);
+  }
+  .position-select-card label.question .req { color: var(--accent); margin-left: 3px; }
+  .position-options {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .position-row {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: .75rem 1rem;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .position-row:hover { border-color: var(--muted); }
+  .position-row input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+    margin-top: .15rem;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .position-row .pos-label {
+    font-weight: 500;
+    color: var(--text);
+    font-size: .9rem;
+  }
+  .position-row .pos-desc {
+    font-size: .78rem;
+    color: var(--muted);
+    margin-top: .1rem;
+  }
+  .duties-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .6rem;
+    display: block;
+  }
 </style>
 </head>
 <body>
@@ -323,7 +478,8 @@
   <div id="formView">
 
     <div class="logo-bar">
-      <img src="data:image/webp;base64,UklGRpQEAABXRUJQVlA4TIcEAAAvgsEYEE9hkG2kmhzsI7/CIAiybeoy8hNdiSDbNlWEIRzvBtK2mYPPv7reQa/gufawONhfQYtBe38AhAALAIQcBWkbMKt/3XsOImIC9MUXwJYkuW0jp0dXgeEIg8GJef//C5WBO7COihH9d+RGkiI5evA0y7wPoGXbah1J0gMjLIEYRVV3M/8RWoCda+Xq74j+Q3AjSZEUdUsDusjsxS8gytpfWY042a+wcKRe2OnpcdgqkAXN8BxsoiA/Qct4DtY+/XdN1vW8zf565ny0zKdnXBgjmPMHMfXSPux5+m9R2YOcj+rw2BKeg80U5MjXU71uP9wHyyr4286x43s3vX36767UGLh5OcyBz64pBgr6tO7pv5tr/y1vk7+WOR9/zKdniIpe/gcprMqen1Mnnh7hS9cAkDC1URmQtElnQLImrQFJmvQGFMlkf//8rvnvnT+/a9IV+ueX5fnHPv9JmZQXrYAJoBUwASRg0v5w0GK0AiaAuKfU2lSDg3eyDVHtNDg4p6wpmprq3M/mZ9SUPcdCHMp6NIKIOptETyRoqnOXFOVgljgwa44Gjb1zDRGvmMWRbcJuTPmZoylZhFDI9tE0zbBTneAX+32LxjstTUTWcDhYFnYbOT/UiGgbF09BovmwOtK1jAjLEeFCWMm8nmKncR1WHc4dUkZdB6jba3IZdLXpSAK5f4Bt2fHCk6WASz3aSVL4mJNNolPEiU3EZgDU235piMqKotSRYJkRZDrBL/bro0FU6rE0uTrhh6ThcCi3zXeelefLli2D/QLFgo1LPE/K9nSyMDjaB9pAR78ip9q67CWQVDnH8UOvD7OH9dC2EnwRsZWgcuFLQ9SbekbXWGWuUzjrN0abkduz6/xlO92x4y2tLb5cwaEt+4AVccxukbqrvCJNql+lxhGv9hLoGu6Vej1AX0ezh9RAP4WuNwDJscu2FED6jsEdmFUdiPbzSbOg4QhTV3lS18ZTZ2bNuJnFpNgXZjPHldyuZjheGWhtOWbLCLmyQJWTOHCj7colvDTq+sbZ7NA+04YOu+zD7JaQ6QS/2K9D6o7PCkRHW/Z7x7iqdgYMu/kLAG17IAHHs+EF16J7CGRAH+BISSCSajeqA6kN+0C2uUEjSxtymQkeXHgBGBEj+Li5Q1sW0coE4f0T3j8hOIaNXfaHK+3kQUwed+hFXpDzHKkerivh7vYSqM3D7AdrAmKOm9Xshw9m1bQhh1Y+Vy07Iup8fYCQYATuavoki8KAPmCrebiqwx9xUY4/orI3R0yIJwLlcYEcYzTzcLA7lo0/bu7zHZvQ+Kx0QqLzES07wRo6y/8jpNI22S9oPA37cr80xnAvoBf6OmLDoy2w+mX2Ekg7qmJX99yRMuJaxCcVK3b7yMAPGJx9s041dCQ6Xw/pM4Prg/ZLbMdrwjPTBMC9f8MZM9MbgU4VAhbPQw4W7L/noBxB0OB+UO+FZmO6UGb7gotCqXmgG9GpDja7thmI327e/LrVzLxKaMWHYUfS0BzHy9sRAK2jkulEv6Sbo3LfSczwBNaJgKR2O5QBAA==" alt="University of Utah ECE Logo">
+      <img class="ece-logo" src="data:image/png;base64,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" alt="University of Utah ECE Logo">
+      <img class="asia-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAABpCAYAAABI1qPhAAADNElEQVR4nO3dTW7bQAyGYTvIQdozJMvcPl32Dj2Ku3IgGJItjUgOP/J9tkUAjebFZPQT9Xq73S7d/Pn9+TPor39/rzOPZVSFMYy6dop2OdFLSpNeYQxnvc0+AOAoooUcooWc99kHkMHWPhE5tVlpq4dZfXxLLaLtMqFdxtkiWtRSPtouq89dh/GWjrbDBK6pPu6y0VafuFcqj7/kY9zKEzai2iPeUtES67ZK4ZbZHhDsc5XOj/xKW2kyoqivutLREuw5qvFKRkusdhTDlYmWUP2pBJw6WkKdK2vEKaIlTh0ZQg6Jlij7iIi6zH1a9BG6PWDFrS1q6xC+pyXceqL3uVMvxAhY26yLMu4e4JA2dw/2It68MsR6lyraJQKeL1OoS2mjfUTE/rJG+kgm2i3EfJxKnFvko0U/PBGDnBLf8nq1RVj7dbhnW/H4c55bkZFjtBqXGlZayCFayCFayCFayCFayOE+LeSw0kIO0UKO9MMF3jsYp/yAQXJPS6x2FOOVipZYfakEnDpaIp0nc8CpoiXSvDJFzBdmYIovzAAr+MIMTERuH0JX2kz7Ithp84UZVl19fGEGEjL8tkwR7RIB55Mh1KV00W4hZn/Z4twiEy1wx31ayCFayJF9n3b0oxSeP3dW9PGq7GEfsdJCDtFCDtFCDtFCTroLsbULCNULBkUK5z/dwwWFk1aZwvlnewA5RAs56fa0a3hZBkustJBDtJBDtJDD/0KOITNvg01baQlW28z5mxItwdYwax7DoyXYWmbMZ2i0BFtT9LyGRUuwtUXOL19NNDbrT3WyiLir4P4Yt8uEPZus+791ORfeXFfaDpM0srJUPy/eq63bnrb6xFwu45OT7f1Ua95z7xItwcKzAfNoOwRroUP0Xi2YRtsl2A7BWfFogre8JuoSv3W4ZtF2WWUxxrIPk2gJFntYdXI6WoLFERa9nIqWYDHibDfD0RIszjjTz1C0BAsLox0djpZgYWmkp0PREiw8HO1qd7QEC09H+toVLcEiwt7OXkZLsIi0p7en0RIsZnjV3Wa0BIuZnvW3Gi3BIoOtDq/fvz4IFFJ4nxZyiBZyiBZyiBZyiBZy/gN2JNFs6D9JnwAAAABJRU5ErkJggg==" alt="UAC Logo">
     </div>
 
     <div class="header-card">
@@ -334,13 +490,122 @@
       <div class="deadline-box">
         <span class="dl-icon">⏱</span>
         <div class="dl-text">
-          <strong>Application Deadline for Fall 2026</strong>
-          <strong style="color:#f0a060;display:inline">Sunday, May 24th at 11:59 pm</strong> - Applications received after this time will not be considered.
+          <strong>Application Deadline — Fall 2026</strong>
+          Submit by <strong style="color:#f0a060;display:inline">Wednesday, May 24th at 11:59 pm</strong>. Applications received after this time will not be considered.
         </div>
       </div>
     </div>
 
-    <p class="required-note">* Indicates required field</p>
+    <!-- ── DUTIES / RESPONSIBILITIES ── -->
+    <div class="duties-card">
+      <h3>Lab TA — Position Overview &amp; Expectations</h3>
+      <div class="duties-grid">
+
+        <div class="duties-group">
+          <h4>Eligibility Requirements</h4>
+          <ul>
+            <li>Must have successfully completed ECE 2280 and ECE 2285</li>
+            <li>Minimum GPA of 3.3 (B+) in both the course and the lab</li>
+            <li>Strong subject knowledge to support students in lab activities</li>
+            <li>Effective communication and mentoring skills in MATLAB, LTspice, and circuit construction</li>
+            <li>Familiarity with Thevenin equivalents, Bode plots, Diodes, BJTs, and MOSFETs</li>
+          </ul>
+        </div>
+
+        <div class="duties-group">
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>Support the professor during lab sessions (3 hrs/week)</li>
+            <li>Assist students with hands-on learning activities during labs</li>
+            <li>Provide clear, constructive peer feedback on lab activities</li>
+            <li>Monitor and report issues with lab equipment, computers, and software</li>
+            <li>Set weekly office hours to help students with course-related questions</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="duties-divider">
+
+      <div class="duties-group">
+        <h4>Time Commitment — 5 Hours Per Week</h4>
+        <div class="duties-time">
+          <span class="time-chip">⏰ 3 hrs — Lab session (Fri 9:00 am–12:00 pm)</span>
+          <span class="time-chip">⏰ 1 hr — Office hours</span>
+          <span class="time-chip">⏰ 1 hr — Prep &amp; meetings with professor</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ── SI TA DUTIES ── -->
+    <div class="duties-card si-card">
+      <h3>Supplemental Instruction TA — Overview &amp; Expectations</h3>
+      <div class="duties-grid">
+
+        <div class="duties-group">
+          <h4>Eligibility Requirements</h4>
+          <ul>
+            <li>Must have successfully completed ECE 2280</li>
+            <li>Minimum GPA of 3.3 (B+) in the course</li>
+            <li>Strong subject knowledge to support students in learning activities</li>
+            <li>Familiarity with Thevenin equivalents, Bode plots, Diodes, BJTs, and MOSFETs</li>
+          </ul>
+        </div>
+
+        <div class="duties-group">
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>Hold one weekly Supplemental Instruction session reinforcing lecture concepts through problem-solving activities</li>
+            <li>Assist students with general course concept mastery</li>
+            <li>Set weekly office hours to support students with course-related questions</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="duties-divider">
+
+      <div class="duties-group">
+        <h4>Time Commitment — 2.5 Hours Per Week</h4>
+        <div class="duties-time">
+          <span class="time-chip">⏰ 1 hr — Supplemental Instruction session</span>
+          <span class="time-chip">⏰ 1 hr — Office hours</span>
+          <span class="time-chip">⏰ 30 min — Prep &amp; meetings with professor</span>
+        </div>
+      </div>
+    </div>
+
+        <p class="required-note">* Indicates required field</p>
+		
+    <!-- ── POSITION SELECTION ── -->
+    <div class="position-select-card">
+      <label class="question">Which position(s) are you applying for? <span class="req">*</span></label>
+      <div class="position-options">
+        <label class="position-row">
+          <input type="checkbox" id="posTA" value="ECE 2280/2285 Lab TA" onchange="syncPositions('individual')">
+          <div>
+            <div class="pos-label">ECE 2280/2285 Lab TA</div>
+            <div class="pos-desc">In-lab support during Friday sessions · 5 hrs/week</div>
+          </div>
+        </label>
+        <label class="position-row">
+          <input type="checkbox" id="posSI" value="ECE 2280 SI TA" onchange="syncPositions('individual')">
+          <div>
+            <div class="pos-label">ECE 2280 SI TA</div>
+            <div class="pos-desc">Supplemental Instruction — weekly problem-solving sessions · 2.5 hrs/week</div>
+          </div>
+        </label>
+        <label class="position-row">
+          <input type="checkbox" id="posBoth" value="Both" onchange="syncPositions('both')">
+          <div>
+            <div class="pos-label">Both Positions</div>
+            <div class="pos-desc">Applying for both the Lab TA and SI TA roles · 7.5 hrs/week</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
 
     <div id="appForm">
 
@@ -413,7 +678,7 @@
 
       <!-- Dual grade input -->
       <div class="card">
-        <label class="question">Please indicate your final grade in ECE 2280 and ECE 2285. (expected grade is fine if you are currently enrolled)</label>
+        <label class="question">Please indicate your final grade in ECE 2280 and ECE 2285.</label>
         <p class="helper" style="margin-bottom:.9rem">Both grades must be greater than or equal to B+ to be considered.</p>
         <div class="grade-row">
           <div>
@@ -453,9 +718,9 @@
       <span class="confirm-icon">✅</span>
       <h2>Application Received</h2>
       <p>Thank you for your interest in becoming a Teaching Assistant for <span class="highlight">ECE 2280/2285</span>. Your application has been successfully submitted.</p>
-      <p>Applications will be reviewed after the deadline has passed on <span class="highlight">Sunday, May 24th at 11:59 pm</span>. You will be notified of the results <span class="highlight">no later than May 28th, 2026</span>.</p>
+      <p>Applications will be reviewed after the deadline has passed on <span class="highlight">Wednesday, May 24th at 11:59 pm</span>. You will be notified of the results <span class="highlight">no later than May 28th, 2026</span>.</p>
       <hr class="confirm-divider">
-      <p style="font-size:.85rem;">If you have any questions, please reach out to Professor Benoit directly at <a href="mailto:evan.benoit@utah.edu" style="color:var(--text);text-decoration:underline;">evan.benoit@utah.edu</a>. Please do not resubmit your application.</p>
+      <p style="font-size:.85rem;">If you have any questions, please reach out to Professor Benoit directly. Please do not resubmit your application.</p>
       <span class="ref-tag" id="refTag">submitted</span>
     </div>
   </div><!-- /#confirmScreen -->
@@ -466,7 +731,7 @@
 
 <script>
   // ── Paste your ECE 2280/2285 Apps Script URL here once deployed ──
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyW8nobnSoQM8jZ6UClemW8TV5Me-kS8DbL56zMYb865qZyuxkyavUhYTbT4rlCdqutaQ/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz1KLSVH5mvDuwmC9EzdTPFbG5Qp9GFyS9ueRuq6GJQSAbdFCZyRnRd3TETsoHQNAokYw/exec";
 
   function getChecked(containerId) {
     return Array.from(
@@ -489,7 +754,26 @@
     setTimeout(() => { t.style.display = "none"; }, 4500);
   }
 
-  function clearForm() {
+  function syncPositions(trigger) {
+    const ta   = document.getElementById("posTA");
+    const si   = document.getElementById("posSI");
+    const both = document.getElementById("posBoth");
+
+    if (trigger === 'both') {
+      // Both toggled — mirror its state to the other two
+      ta.checked = both.checked;
+      si.checked = both.checked;
+    } else {
+      // Individual toggled — check if both are now selected
+      if (ta.checked && si.checked) {
+        both.checked = true;
+      } else {
+        both.checked = false;
+      }
+    }
+  }
+
+    function clearForm() {
     document.getElementById("fullName").value = "";
     document.getElementById("email").value = "";
     document.querySelectorAll('input[name="major"]').forEach(r => r.checked = false);
@@ -499,6 +783,9 @@
     document.getElementById("grade2280").value = "";
     document.getElementById("grade2285").value = "";
     document.getElementById("additionalInfo").value = "";
+    document.getElementById("posTA").checked = false;
+    document.getElementById("posSI").checked = false;
+    document.getElementById("posBoth").checked = false;
   }
 
   function showConfirmation() {
@@ -521,6 +808,18 @@
     }
     if (!major) { showToast("⚠  Please select your Major Status.", true); return; }
 
+    const posTA   = document.getElementById("posTA").checked;
+    const posSI   = document.getElementById("posSI").checked;
+    const posBoth = document.getElementById("posBoth").checked;
+    if (!posTA && !posSI && !posBoth) {
+      showToast("⚠  Please select at least one position.", true); return;
+    }
+    const positionApplied = [
+      posTA   ? "ECE 2280/2285 Lab TA" : null,
+      posSI   ? "ECE 2280 SI TA"       : null,
+      posBoth ? "Both"                 : null
+    ].filter(Boolean).join(", ");
+
     const payload = {
       timestamp:      new Date().toLocaleString(),
       fullName:       name,
@@ -528,9 +827,10 @@
       major:          major,
       coursesTaken:   getChecked("coursesTaken"),
       taCourses:      getChecked("taCourses"),
-      grade2280:      document.getElementById("grade2280").value.trim(),
-      grade2285:      document.getElementById("grade2285").value.trim(),
-      additionalInfo: document.getElementById("additionalInfo").value.trim()
+      grade2280:       document.getElementById("grade2280").value.trim(),
+      grade2285:       document.getElementById("grade2285").value.trim(),
+      positionApplied: positionApplied,
+      additionalInfo:  document.getElementById("additionalInfo").value.trim()
     };
 
     const btn = document.getElementById("submitBtn");
