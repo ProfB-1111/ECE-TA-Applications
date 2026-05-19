@@ -52,11 +52,17 @@
   /* ── logo bar (form view) ── */
   .logo-bar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1.25rem;
   }
-  .logo-bar img {
+  .logo-bar .ece-logo {
     height: 48px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .logo-bar .asia-logo {
+    height: 52px;
     width: auto;
     filter: brightness(0) invert(1);
   }
@@ -320,6 +326,79 @@
     white-space: nowrap;
   }
   #toast.error { background: #2a1a1a; border-color: var(--accent); color: var(--accent); }
+
+  /* ── duties section ── */
+  .duties-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .duties-card h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .duties-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1.5rem;
+  }
+  @media (max-width: 520px) { .duties-grid { grid-template-columns: 1fr; } }
+  .duties-group h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: .5rem;
+    letter-spacing: .04em;
+  }
+  .duties-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .duties-group ul li {
+    font-size: .85rem;
+    color: var(--muted);
+    padding-left: .9rem;
+    position: relative;
+    margin-bottom: .3rem;
+    line-height: 1.5;
+  }
+  .duties-group ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .duties-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1rem 0;
+  }
+  .duties-time {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: .25rem;
+  }
+  .time-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem;
+    color: var(--accent2);
+    background: rgba(224,90,0,.08);
+    border: 1px solid rgba(224,90,0,.3);
+    border-radius: 3px;
+    padding: .2rem .6rem;
+  }
 </style>
 </head>
 <body>
@@ -331,7 +410,8 @@
   <div id="formView">
 
     <div class="logo-bar">
-      <img src="data:image/webp;base64,UklGRpQEAABXRUJQVlA4TIcEAAAvgsEYEE9hkG2kmhzsI7/CIAiybeoy8hNdiSDbNlWEIRzvBtK2mYPPv7reQa/gufawONhfQYtBe38AhAALAIQcBWkbMKt/3XsOImIC9MUXwJYkuW0jp0dXgeEIg8GJef//C5WBO7COihH9d+RGkiI5evA0y7wPoGXbah1J0gMjLIEYRVV3M/8RWoCda+Xq74j+Q3AjSZEUdUsDusjsxS8gytpfWY042a+wcKRe2OnpcdgqkAXN8BxsoiA/Qct4DtY+/XdN1vW8zf565ny0zKdnXBgjmPMHMfXSPux5+m9R2YOcj+rw2BKeg80U5MjXU71uP9wHyyr4286x43s3vX36767UGLh5OcyBz64pBgr6tO7pv5tr/y1vk7+WOR9/zKdniIpe/gcprMqen1Mnnh7hS9cAkDC1URmQtElnQLImrQFJmvQGFMlkf//8rvnvnT+/a9IV+ueX5fnHPv9JmZQXrYAJoBUwASRg0v5w0GK0AiaAuKfU2lSDg3eyDVHtNDg4p6wpmprq3M/mZ9SUPcdCHMp6NIKIOptETyRoqnOXFOVgljgwa44Gjb1zDRGvmMWRbcJuTPmZoylZhFDI9tE0zbBTneAX+32LxjstTUTWcDhYFnYbOT/UiGgbF09BovmwOtK1jAjLEeFCWMm8nmKncR1WHc4dUkZdB6jba3IZdLXpSAK5f4Bt2fHCk6WASz3aSVL4mJNNolPEiU3EZgDU235piMqKotSRYJkRZDrBL/bro0FU6rE0uTrhh6ThcCi3zXeelefLli2D/QLFgo1LPE/K9nSyMDjaB9pAR78ip9q67CWQVDnH8UOvD7OH9dC2EnwRsZWgcuFLQ9SbekbXWGWuUzjrN0abkduz6/xlO92x4y2tLb5cwaEt+4AVccxukbqrvCJNql+lxhGv9hLoGu6Vej1AX0ezh9RAP4WuNwDJscu2FED6jsEdmFUdiPbzSbOg4QhTV3lS18ZTZ2bNuJnFpNgXZjPHldyuZjheGWhtOWbLCLmyQJWTOHCj7colvDTq+sbZ7NA+04YOu+zD7JaQ6QS/2K9D6o7PCkRHW/Z7x7iqdgYMu/kLAG17IAHHs+EF16J7CGRAH+BISSCSajeqA6kN+0C2uUEjSxtymQkeXHgBGBEj+Li5Q1sW0coE4f0T3j8hOIaNXfaHK+3kQUwed+hFXpDzHKkerivh7vYSqM3D7AdrAmKOm9Xshw9m1bQhh1Y+Vy07Iup8fYCQYATuavoki8KAPmCrebiqwx9xUY4/orI3R0yIJwLlcYEcYzTzcLA7lo0/bu7zHZvQ+Kx0QqLzES07wRo6y/8jpNI22S9oPA37cr80xnAvoBf6OmLDoy2w+mX2Ekg7qmJX99yRMuJaxCcVK3b7yMAPGJx9s041dCQ6Xw/pM4Prg/ZLbMdrwjPTBMC9f8MZM9MbgU4VAhbPQw4W7L/noBxB0OB+UO+FZmO6UGb7gotCqXmgG9GpDja7thmI327e/LrVzLxKaMWHYUfS0BzHy9sRAK2jkulEv6Sbo3LfSczwBNaJgKR2O5QBAA==" alt="University of Utah ECE Logo">
+      <img class="ece-logo" src="data:image/png;base64,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" alt="University of Utah ECE Logo">
+      <img class="asia-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAABpCAYAAABI1qPhAAADNElEQVR4nO3dTW7bQAyGYTvIQdozJMvcPl32Dj2Ku3IgGJItjUgOP/J9tkUAjebFZPQT9Xq73S7d/Pn9+TPor39/rzOPZVSFMYy6dop2OdFLSpNeYQxnvc0+AOAoooUcooWc99kHkMHWPhE5tVlpq4dZfXxLLaLtMqFdxtkiWtRSPtouq89dh/GWjrbDBK6pPu6y0VafuFcqj7/kY9zKEzai2iPeUtES67ZK4ZbZHhDsc5XOj/xKW2kyoqivutLREuw5qvFKRkusdhTDlYmWUP2pBJw6WkKdK2vEKaIlTh0ZQg6Jlij7iIi6zH1a9BG6PWDFrS1q6xC+pyXceqL3uVMvxAhY26yLMu4e4JA2dw/2It68MsR6lyraJQKeL1OoS2mjfUTE/rJG+kgm2i3EfJxKnFvko0U/PBGDnBLf8nq1RVj7dbhnW/H4c55bkZFjtBqXGlZayCFayCFayCFayCFayOE+LeSw0kIO0UKO9MMF3jsYp/yAQXJPS6x2FOOVipZYfakEnDpaIp0nc8CpoiXSvDJFzBdmYIovzAAr+MIMTERuH0JX2kz7Ithp84UZVl19fGEGEjL8tkwR7RIB55Mh1KV00W4hZn/Z4twiEy1wx31ayCFayJF9n3b0oxSeP3dW9PGq7GEfsdJCDtFCDtFCDtFCTroLsbULCNULBkUK5z/dwwWFk1aZwvlnewA5RAs56fa0a3hZBkustJBDtJBDtJDD/0KOITNvg01baQlW28z5mxItwdYwax7DoyXYWmbMZ2i0BFtT9LyGRUuwtUXOL19NNDbrT3WyiLir4P4Yt8uEPZus+791ORfeXFfaDpM0srJUPy/eq63bnrb6xFwu45OT7f1Ua95z7xItwcKzAfNoOwRroUP0Xi2YRtsl2A7BWfFogre8JuoSv3W4ZtF2WWUxxrIPk2gJFntYdXI6WoLFERa9nIqWYDHibDfD0RIszjjTz1C0BAsLox0djpZgYWmkp0PREiw8HO1qd7QEC09H+toVLcEiwt7OXkZLsIi0p7en0RIsZnjV3Wa0BIuZnvW3Gi3BIoOtDq/fvz4IFFJ4nxZyiBZyiBZyiBZyiBZy/gN2JNFs6D9JnwAAAABJRU5ErkJggg==" alt="UAC Logo">
     </div>
 
     <div class="header-card">
@@ -348,8 +428,47 @@
       </div>
     </div>
 
-    <p class="required-note">* Indicates required field</p>
+    <!-- ── DUTIES / RESPONSIBILITIES ── -->
+    <div class="duties-card">
+      <h3>Position Overview &amp; Expectations</h3>
+      <div class="duties-grid">
 
+        <div class="duties-group">
+          <h4>Eligibility Requirements</h4>
+          <ul>
+            <li>Must have successfully completed ECE 3610</li>
+            <li>Minimum GPA of 3.3 (B+) in the course</li>
+            <li>Strong subject knowledge to support students in lab activities</li>
+            <li>Effective communication and mentoring skills in MATLAB and Arduino</li>
+          </ul>
+        </div>
+
+        <div class="duties-group">
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>Support the professor during class sessions (3 hrs/week)</li>
+            <li>Assist students with hands-on learning activities</li>
+            <li>Provide clear, constructive peer feedback on course activities</li>
+            <li>Monitor and report issues with lab equipment, computers, and software</li>
+            <li>Set weekly office hours to help students with course-related questions</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="duties-divider">
+
+      <div class="duties-group">
+        <h4>Time Commitment — 5 Hours Per Week</h4>
+        <div class="duties-time">
+          <span class="time-chip">⏰ 3 hrs — In class (Tue/Thu 9:00–10:20 am)</span>
+          <span class="time-chip">⏰ 1 hr — Office hours</span>
+          <span class="time-chip">⏰ 1 hr — Prep &amp; meetings with professor</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="required-note">* Indicates required field</p>
     <div id="appForm">
 
       <div class="card">
